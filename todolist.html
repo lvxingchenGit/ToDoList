@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        h2{
+            width:350px;
+            height:50px;
+            border:1px solid #bbb;
+            border-radius:5px;
+            line-height:50px;
+            padding:0 0 0 15px;
+            font-size:25px;
+            color:#666;
+            background:rgb(247, 247, 247);
+            cursor:pointer;
+        }
+        h2:hover{
+            background:rgb(231, 231, 231);
+        }
+        img{
+            width:30px;
+            height:30px;
+            background: #ccc;
+            border-radius:50%;
+            position: absolute;
+            top:10px;
+            left:300px;
+            transition:all 0.3s;
+        }
+        img:hover{
+            box-shadow:2px 2px 6px #666;
+            transform:scale(1.2);
+            transition:all 0.3s;
+        }
+        .box{
+            position: relative;
+           
+        }
+        #inp{
+            position: absolute;
+            top:20%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            margin:50px auto;
+        }
+        input{
+            width:350px;
+            height:50px;
+            border:2px solid rgb(138, 138, 138);
+            border-radius:10px;
+            outline: none;
+            font-size:25px;
+            color:#666;
+            padding:0 15px 0 15px;
+        }
+        h1{
+            color:rgb(122, 211, 247);
+            margin-left:50px;
+            margin-top:-30px
+        }
+    </style>
+
+</head>
+ 
+<body>
+<div id="inp">
+    <h1 ref="todulist">~^o^~_ToDoList</h1>
+    <input type="text" v-model="myValue" @keyup.enter="handleClickAdd">
+        <div class="box" v-for="(item,index) of myArr">
+            <h2>{{item}}</h2>
+            <img  @click="close(index)" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1548410531981&di=931d0cf90efb9c471b7e10ecca564acd&imgtype=0&src=http%3A%2F%2Fku.90sjimg.com%2Felement_origin_min_pic%2F00%2F98%2F05%2F4456f33204e5f1f.jpg"></img>
+        </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+
+// ++++++++++++++++++++++++++++++toduList
+let vm = new Vue({
+    el:"#inp",
+    data:{
+        myValue:"",
+        myArr:[]
+    },
+    methods:{
+        handleClickAdd(){
+            
+            if(this.myValue.length == 0){
+                window.confirm("输入框不能为空")
+            }else{
+                this.myArr.unshift(this.myValue)
+                this.myValue = ""
+            }
+        },
+        close(val){
+            this.myArr = this.myArr.filter((item,index)=>{
+                return val !=index
+            })
+            
+        }
+    }
+})
+
+</script>
+</body>
+</html>
